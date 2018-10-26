@@ -28,3 +28,7 @@ cd viz
 yarn
 yarn run dev
 ```
+
+## Fhir model building
+
+- https://github.com/smart-on-fhir/client-py#data-model-use

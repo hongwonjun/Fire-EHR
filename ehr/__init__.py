@@ -11,6 +11,8 @@ app.debug = True
 
 app.config['APP_ROOT'] = os.path.abspath(os.path.dirname(__file__))
 
+app.config['FHIR_RESOURCES'] = os.path.join(
+    app.config['APP_ROOT'], '../resources')
 # Compress text, css, xml, json responeses
 Compress(app)
 
@@ -24,8 +26,10 @@ cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 # routes
 from ehr.controllers.patient import patient_route
+from ehr.controllers.observation import observation_route
 
 # routes cluster
 app.register_blueprint(patient_route)
+app.register_blueprint(observation_route)
 
 import ehr.route

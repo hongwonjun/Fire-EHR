@@ -1,22 +1,8 @@
 # -*- coding: utf-8 -*-
-# import os
-# import sys
-import json
-# import random
-# import hashlib
-
-# import pandas as pd
-# import numpy as np
-
-# from collections import defaultdict
-# from datetime import datetime
 from flask import Blueprint, request, jsonify, make_response
 from flask_cors import cross_origin
 import fhirclient.models.patient as p
 import fhirclient.models.humanname as hn
-# import sqlalchemy
-# from sqlalchemy import *
-# from sqlalchemy.schema import *
 
 from ehr import (
     app,
@@ -38,6 +24,7 @@ def patient(id):
     # gender={gender}&
     # _format=json
 
+    # TODO: query params
     # name = request.args.get('name', None)
 
     # TODO: connect to database to search patient
@@ -46,6 +33,7 @@ def patient(id):
     for row in result:
         pass
 
+    # dummy data
     patient = p.Patient({'id': str(id)})
     name = hn.HumanName()
     name.given = ['Peter']
