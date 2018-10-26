@@ -1,0 +1,22 @@
+# Config
+devshell
+ehr/ehr.cfg
+deploy.json
+
+# Environment
+venv
+
+# OSX
+.DS_Store
+
+# Python
+*.pyc
+
+# Visual Studio Code
+.vscode
+
+# IntelliJ
+.idea
+*.iml
+
+.pytest_cache/
