@@ -79,7 +79,7 @@ def patient_list():
         # patient.maritalStatus = row['pat_marital']
         plist.append(patient.as_json())
 
-    return jsonify(result=plist, total=total)
+    return jsonify(results=plist, total=total)
 
 
 @patient_route.route("/<id>", methods=["GET"])
