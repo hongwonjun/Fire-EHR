@@ -10,6 +10,12 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+- create cfg file and edit it
+
+```
+cp ehr/ehr.default.cfg ehr/ehr.cfg
+```
+
 - run server
 
 ```
@@ -20,6 +26,12 @@ python run.py
 
 - install nvm & node
   https://github.com/creationix/nvm
+
+- create cfg file and edit it
+
+```
+cp viz/config.default.json viz/config.json
+```
 
 - run viz
 
