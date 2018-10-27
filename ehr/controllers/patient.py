@@ -19,10 +19,45 @@ patient_route = Blueprint(
 )
 
 
+# @patient_route.route("/list", methods=["GET"])
+# def patient_list():
+#     result = db.engine.execute("select * from T_Patients limit 10")
+#     plist = []
+#     for row in result:
+#         patient = p.Patient({'id': row['pat_id']})
+#
+#         name = hn.HumanName()
+#         name.given = [row['pat_first']]
+#         name.family = row['pat_last']
+#         patient.name = [name]
+#
+#         address = addr.Address()
+#         address.city = row['pat_city']
+#         address.state = row['pat_state']
+#         address.postalCode = row['pat_zip']
+#         address.district = row['pat_address']
+#         patient.address = [address]
+#
+#         patient.gender = row['pat_gender']
+#         patient.birthDate = fd.FHIRDate(
+#             datetime.strftime(row['pat_birthdate'], "%Y-%m-%d"))
+#         # patient.maritalStatus = row['pat_marital']
+#         plist.append(patient.as_json())
+#     return jsonify(result=plist)
+
 @patient_route.route("/list", methods=["GET"])
 def patient_list():
-    result = db.engine.execute("select * from T_Patients limit 10")
+    start = request.args.get('start', 0)
+    length = request.args.get('length', 100)
+
+    start = int(start)
+    length = int(length)
+
+    count = db.engine.execute("select count(*) from T_Patients").scalar()
+    result = db.engine.execute("select * from T_Patients limit %d, %d" % (start, length))
     plist = []
+    total = count
+
     for row in result:
         patient = p.Patient({'id': row['pat_id']})
 
@@ -43,7 +78,8 @@ def patient_list():
             datetime.strftime(row['pat_birthdate'], "%Y-%m-%d"))
         # patient.maritalStatus = row['pat_marital']
         plist.append(patient.as_json())
-    return jsonify(result=plist)
+
+    return jsonify(result=plist, total=total)
 
 
 @patient_route.route("/<id>", methods=["GET"])
